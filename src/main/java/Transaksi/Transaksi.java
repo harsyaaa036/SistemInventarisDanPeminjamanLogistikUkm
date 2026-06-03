@@ -10,24 +10,35 @@ package Transaksi;
  */
 import java.time.LocalDate;
 public class Transaksi {
-    protected int idTransaksi;
-    protected LocalDate tanggal = LocalDate.now();
-    protected String status;
+    private int idTransaksi;
+    private String status;
+    private LocalDate tanggal = LocalDate.now();
 
     public Transaksi(int idTransaksi, String status) {
         this.idTransaksi = idTransaksi;
         this.status = status;
+        this.tanggal = LocalDate.now();
+    }
+
+    public int getIdTransaksi() {
+        return idTransaksi;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public LocalDate getTanggal() {
+        return tanggal;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
-    public void CreateTransaksi(){
-    
-    }
-    
-    public void UpdateStatus(){
-    
-    }
-    
-    public void CancelTransaksi(){
-    
+    public void MembuatTransaksi(){
+        System.out.println("Transaksi Berhasil Dibuat \n"
+                + "ID Transaksi: " + this.idTransaksi + "\n" +
+                "Waktu Pembuatan Transaksi: " + this.tanggal);
     }
 }
