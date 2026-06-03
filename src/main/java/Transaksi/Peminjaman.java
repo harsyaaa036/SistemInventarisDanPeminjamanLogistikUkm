@@ -9,24 +9,30 @@ package Transaksi;
  * @author Hype AMD
  */
 import java.time.LocalDate;
-public class Peminjaman extends Transaksi{
-    protected LocalDate tanggalPinjam = LocalDate.now();
-    protected LocalDate rencanaPengembalian = LocalDate.now();
+public class Peminjaman extends Transaksi implements AddOnTransaksi{
+    private LocalDate tanggalPinjam = LocalDate.now();
+    private LocalDate rencanaPengembalian = LocalDate.now();
 
     public Peminjaman(int idTransaksi, String status) {
         super(idTransaksi, status);
     }
     
-    public void AjukanPeminjaman(){
-    
+    public void hitungDurasiPeminjaman(){
+        
     }
     
-    public void DurasiPeminjaman(){
-    
+    public boolean validasiStok(){
+        return true;
     }
-    
-    public void ValidasiStok(){
-    
+
+    @Override
+    public void hitungDurasi() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void cetakStruk() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -8,24 +8,30 @@ package Transaksi;
  * @author Hype AMD
  */
 import java.time.LocalDate;
-public class Pengembalian extends Transaksi{
-    protected LocalDate tanggalPengembalian = LocalDate.now();
-    protected String kondisiAkhir;
-    protected int denda;
+public class Pengembalian extends Transaksi implements AddOnTransaksi{
+    private LocalDate tanggalPengembalian = LocalDate.now();
+    private String kondisiAkhir;
+    private long denda;
 
     public Pengembalian(int idTransaksi, String status) {
         super(idTransaksi, status);
     }
     
-    public void ProsesPengembalian(){
-    
+    public long hitungDenda(){
+        return 0;
     }
     
-    public void HitungDenda(){
-    
+    public String cekKondisiBarang(){   
+        return null;
     }
-    
-    public void CekKondisiBarang(){
-    
+
+    @Override
+    public void hitungDurasi() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void cetakStruk() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
