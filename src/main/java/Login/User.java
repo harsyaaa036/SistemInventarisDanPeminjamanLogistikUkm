@@ -8,6 +8,22 @@ package Login;
  *
  * @author masag
  */
-public class User {
-    private String Username;
+public abstract class User {
+    protected String username;
+    protected String password;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public abstract void showMenu();
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
