@@ -8,16 +8,16 @@ package Login;
  *
  * @author masag
  */
-
-    public class Anggota extends User implements ILogin {
+public class Anggota extends User implements ILogin {
     private String instansi;
     private String noHp;
     private String lokasiAcara;
 
-    public Anggota(String username, String password, String instansi, String noHp) {
+    public Anggota(String username, String password, String instansi, String noHp, String lokasiAcara) {
         super(username, password);
         this.instansi = instansi;
         this.noHp = noHp;
+        this.lokasiAcara = lokasiAcara;
     }
 
     @Override
@@ -28,7 +28,9 @@ package Login;
         System.out.println("3. Beli Barang");
     }
 
+    @Override
     public void login() { System.out.println("Anggota login berhasil."); }
+    @Override
     public void logout() { System.out.println("Anggota logout."); }
 
     public void ajukanPeminjaman() { /* Logika pengajuan */ }
@@ -36,4 +38,3 @@ package Login;
     public void lihatStatusPeminjaman() { /* Logika cek status */ }
     public void cancelTransaksi() { /* Logika pembatalan */ }
 }
-    

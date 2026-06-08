@@ -26,14 +26,18 @@ public class Admin extends User implements ILogin, ICrudBarang {
         System.out.println("3. Laporan Transaksi");
     }
 
-    // Implementasi Interface ICrudBarang
+    @Override
     public void tambahBarang() { System.out.println("Admin menambah barang..."); }
+    @Override
     public void hapusBarang() { System.out.println("Admin menghapus barang..."); }
+    @Override
     public void editBarang() { System.out.println("Admin mengedit barang..."); }
+    @Override
     public void cariBarang() { System.out.println("Admin mencari barang..."); }
 
-    // Implementasi Interface ILogin
+    @Override
     public void login() { System.out.println("Admin login berhasil."); }
+    @Override
     public void logout() { System.out.println("Admin logout."); }
 
     public void daftarLaporanPeminjaman() { /* Logika laporan */ }

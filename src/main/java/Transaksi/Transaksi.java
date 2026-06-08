@@ -1,21 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Transaksi;
 
-/**
- *
- * @author Hype AMD
- */
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Transaksi {
+    private static int counter = 1000;
     private int idTransaksi;
     private String status;
-    private LocalDate tanggal = LocalDate.now();
+    private LocalDate tanggal;
 
-    public Transaksi(int idTransaksi, String status) {
-        this.idTransaksi = idTransaksi;
+    public Transaksi(String status) {
+        this.idTransaksi = counter++;
         this.status = status;
         this.tanggal = LocalDate.now();
     }
@@ -35,10 +30,12 @@ public class Transaksi {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    public void MembuatTransaksi(){
-        System.out.println("Transaksi Berhasil Dibuat \n"
-                + "ID Transaksi: " + this.idTransaksi + "\n" +
-                "Waktu Pembuatan Transaksi: " + this.tanggal);
+
+    public void buatTransaksi() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        System.out.println("Transaksi Berhasil Dibuat");
+        System.out.println("ID Transaksi: " + idTransaksi);
+        System.out.println("Tanggal: " + tanggal.format(fmt));
+        System.out.println("Status: " + status);
     }
 }

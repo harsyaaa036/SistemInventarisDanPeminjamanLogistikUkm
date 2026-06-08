@@ -15,7 +15,7 @@ public class LoginMenu {
 
     private void initData() {
         daftarUser.add(new Admin("admin", "admin123", 12345, "Ketua UKM"));
-        daftarUser.add(new Anggota("anggota", "anggota123", "Universitas A", "08123456789"));
+        daftarUser.add(new Anggota("anggota", "anggota123", "Universitas A", "08123456789", "Gedung Serbaguna"));
     }
 
     public void start() {
