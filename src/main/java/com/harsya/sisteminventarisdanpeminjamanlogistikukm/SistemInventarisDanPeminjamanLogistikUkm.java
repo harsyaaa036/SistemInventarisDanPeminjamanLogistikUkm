@@ -4,13 +4,12 @@
 
 package com.harsya.sisteminventarisdanpeminjamanlogistikukm;
 
-/**
- *
- * @author Hype AMD
- */
+import Login.LoginMenu;
+
 public class SistemInventarisDanPeminjamanLogistikUkm {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        LoginMenu menu = new LoginMenu();
+        menu.start();
     }
 }
