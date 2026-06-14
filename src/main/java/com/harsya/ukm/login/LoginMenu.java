@@ -1,4 +1,4 @@
-package Login;
+package com.harsya.ukm.login;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,28 +19,33 @@ public class LoginMenu {
     }
 
     public void start() {
-        System.out.println("=== SISTEM INVENTARIS & PEMINJAMAN LOGISTIK UKM ===");
-        int pilihan;
-        do {
-            System.out.println("1. Login");
-            System.out.println("2. Registrasi");
-            System.out.println("0. Keluar");
-            System.out.print("Pilih menu: ");
-            pilihan = scanner.nextInt();
-            scanner.nextLine();
+        try {
+            System.out.println("=== SISTEM INVENTARIS & PEMINJAMAN LOGISTIK UKM ===");
+            int pilihan;
+            do {
+                System.out.println("1. Login");
+                System.out.println("2. Registrasi");
+                System.out.println("0. Keluar");
+                System.out.print("Pilih menu: ");
+                pilihan = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (pilihan) {
-                case 1 -> {
-                    User user = prosesLogin();
-                    if (user != null) {
-                        user.showMenu();
+                switch (pilihan) {
+                    case 1 -> {
+                        User user = prosesLogin();
+                        if (user != null) {
+                            user.showMenu();
+                        }
                     }
+                    case 2 -> registrasi();
+                    case 0 -> System.out.println("Terima kasih!");
+                    default -> System.out.println("Pilihan tidak valid.");
                 }
-                case 2 -> registrasi();
-                case 0 -> System.out.println("Terima kasih!");
-                default -> System.out.println("Pilihan tidak valid.");
-            }
-        } while (pilihan != 0);
+            } while (pilihan != 0);
+        } finally {
+            System.out.println("Program selesai. Resource dibersihkan.");
+            scanner.close();
+        }
     }
 
     private User prosesLogin() {

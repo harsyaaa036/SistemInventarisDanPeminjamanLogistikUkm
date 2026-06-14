@@ -1,4 +1,6 @@
-package Barang;
+package com.harsya.ukm.barang;
+
+import java.util.Objects;
 
 public class Barang {
     private static int counter = 1;
@@ -12,6 +14,16 @@ public class Barang {
         this.nama = nama;
         this.stok = stok;
         this.harga = harga;
+    }
+
+    public Barang(int id, String nama, int stok, double harga) {
+        this.id = id;
+        this.nama = nama;
+        this.stok = stok;
+        this.harga = harga;
+        if (id >= counter) {
+            counter = id + 1;
+        }
     }
 
     public int getId() {
@@ -40,6 +52,23 @@ public class Barang {
 
     public void setHarga(double harga) {
         this.harga = harga;
+    }
+
+    public void setHarga(int harga) {
+        this.harga = harga;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Barang barang = (Barang) o;
+        return id == barang.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

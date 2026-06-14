@@ -1,4 +1,4 @@
-package Transaksi;
+package com.harsya.ukm.transaksi;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,6 +43,11 @@ public class Pengembalian extends Transaksi implements AddOnTransaksi {
         return denda;
     }
 
+    public int getIdPeminjaman() { return idPeminjaman; }
+    public void setIdPeminjaman(int idPeminjaman) { this.idPeminjaman = idPeminjaman; }
+    public LocalDate getTanggalPengembalian() { return tanggalPengembalian; }
+    public String getKondisiAkhir() { return kondisiAkhir; }
+
     @Override
     public void hitungDurasi() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -64,5 +69,13 @@ public class Pengembalian extends Transaksi implements AddOnTransaksi {
         System.out.println("Denda          : Rp" + denda);
         System.out.println("Status         : " + getStatus());
         System.out.println("===================================");
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return super.toString() + " | ID Pinjam: " + idPeminjaman
+                + " | Kembali: " + tanggalPengembalian.format(fmt)
+                + " | Kondisi: " + kondisiAkhir + " | Denda: Rp" + denda;
     }
 }

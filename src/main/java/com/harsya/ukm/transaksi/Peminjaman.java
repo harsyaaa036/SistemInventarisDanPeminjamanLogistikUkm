@@ -1,5 +1,6 @@
-package Transaksi;
+package com.harsya.ukm.transaksi;
 
+import com.harsya.ukm.exception.StokTidakCukupException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -47,14 +48,12 @@ public class Peminjaman extends Transaksi implements AddOnTransaksi {
         System.out.println("Rencana Kembali: " + rencanaPengembalian.format(fmt));
     }
 
-    public boolean validasiStok(int stokTersedia) {
+    public boolean validasiStok(int stokTersedia) throws StokTidakCukupException {
         if (jumlah <= 0) {
-            System.out.println("Jumlah barang tidak valid.");
-            return false;
+            throw new StokTidakCukupException(namaBarang, stokTersedia, jumlah);
         }
         if (jumlah > stokTersedia) {
-            System.out.println("Stok tidak mencukupi! Tersedia: " + stokTersedia);
-            return false;
+            throw new StokTidakCukupException(namaBarang, stokTersedia, jumlah);
         }
         System.out.println("Stok tersedia: " + stokTersedia + ", diminta: " + jumlah + " => Valid");
         return true;
@@ -79,5 +78,13 @@ public class Peminjaman extends Transaksi implements AddOnTransaksi {
         System.out.println("Durasi         : " + durasi + " hari");
         System.out.println("Status         : " + getStatus());
         System.out.println("===================================");
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return super.toString() + " | " + namaBarang + " x" + jumlah
+                + " | Pinjam: " + tanggalPinjam.format(fmt)
+                + " | Rencana: " + rencanaPengembalian.format(fmt);
     }
 }
