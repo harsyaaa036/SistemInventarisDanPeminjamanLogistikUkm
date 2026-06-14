@@ -1,7 +1,7 @@
-package GUI;
+package com.harsya.ukm.gui;
 
-import Barang.Barang;
-import Database.DataStore;
+import com.harsya.ukm.barang.Barang;
+import com.harsya.ukm.database.DataStore;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

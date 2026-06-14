@@ -1,8 +1,10 @@
-package GUI;
+package com.harsya.ukm.gui;
 
-import Database.DataStore;
-import Login.Admin;
-import Login.User;
+import com.harsya.ukm.database.DataStore;
+import com.harsya.ukm.login.Admin;
+import com.harsya.ukm.login.Anggota;
+import com.harsya.ukm.login.ILogin;
+import com.harsya.ukm.login.User;
 import javax.swing.*;
 import java.awt.*;
 
@@ -86,11 +88,17 @@ public class LoginPanel extends JPanel {
         User user = DataStore.findUser(username);
         if (user != null && user.verifyPassword(password)) {
             messageLabel.setText(" ");
+
+            ILogin loginRef = (ILogin) user;
+            loginRef.login();
+
             if (user instanceof Admin) {
-                mainFrame.getAdminDashboard().setUser(username);
+                Admin admin = (Admin) user;
+                mainFrame.getAdminDashboard().setUser(admin.getUsername());
                 mainFrame.showPanel("AdminDashboard");
-            } else {
-                mainFrame.getAnggotaDashboard().setUser(username);
+            } else if (user instanceof Anggota) {
+                Anggota anggota = (Anggota) user;
+                mainFrame.getAnggotaDashboard().setUser(anggota.getUsername());
                 mainFrame.showPanel("AnggotaDashboard");
             }
         } else {

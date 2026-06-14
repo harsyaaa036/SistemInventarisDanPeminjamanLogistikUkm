@@ -1,4 +1,4 @@
-package Login;
+package com.harsya.ukm.login;
 
 import java.util.Scanner;
 
@@ -84,5 +84,17 @@ public class Anggota extends User implements ILogin {
         int id = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Transaksi ID " + id + " berhasil dibatalkan.");
+    }
+
+    public String getInstansi() { return instansi; }
+    public void setInstansi(String instansi) { this.instansi = instansi; }
+    public String getNoHp() { return noHp; }
+    public void setNoHp(String noHp) { this.noHp = noHp; }
+    public String getLokasiAcara() { return lokasiAcara; }
+    public void setLokasiAcara(String lokasiAcara) { this.lokasiAcara = lokasiAcara; }
+
+    @Override
+    public String toString() {
+        return super.toString() + " | Instansi: " + instansi + " | No HP: " + noHp + " | Lokasi: " + lokasiAcara;
     }
 }

@@ -1,12 +1,12 @@
-package GUI;
+package com.harsya.ukm.gui;
 
-import Barang.Barang;
-import Database.DataStore;
-import Transaksi.Peminjaman;
+import com.harsya.ukm.barang.Barang;
+import com.harsya.ukm.database.DataStore;
+import com.harsya.ukm.exception.StokTidakCukupException;
+import com.harsya.ukm.transaksi.Peminjaman;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class PeminjamanDialog extends JDialog {
@@ -68,10 +68,16 @@ public class PeminjamanDialog extends JDialog {
         gbc.gridy = 6;
         add(submitButton, gbc);
 
-        submitButton.addActionListener(e -> ajukan(username));
+        submitButton.addActionListener(e -> {
+            try {
+                ajukan(username);
+            } catch (StokTidakCukupException ex) {
+                messageLabel.setText(ex.getMessage());
+            }
+        });
     }
 
-    private void ajukan(String username) {
+    private void ajukan(String username) throws StokTidakCukupException {
         if (barangCombo.getSelectedIndex() < 0) return;
         String selected = (String) barangCombo.getSelectedItem();
         int idBarang = Integer.parseInt(selected.split(" - ")[0]);
@@ -85,8 +91,7 @@ public class PeminjamanDialog extends JDialog {
                 return;
             }
             if (jumlah > barang.getStok()) {
-                messageLabel.setText("Stok tidak mencukupi! Tersedia: " + barang.getStok());
-                return;
+                throw new StokTidakCukupException(barang.getNama(), barang.getStok(), jumlah);
             }
 
             LocalDate tglPinjam = LocalDate.parse(tglPinjamField.getText().trim());
@@ -98,6 +103,8 @@ public class PeminjamanDialog extends JDialog {
             }
 
             Peminjaman p = new Peminjaman(barang.getNama(), jumlah, tglPinjam, tglRencana);
+            p.validasiStok(barang.getStok());
+
             barang.setStok(barang.getStok() - jumlah);
             DataStore.daftarPeminjaman.add(p);
 

@@ -1,5 +1,9 @@
-package GUI;
+package com.harsya.ukm.gui;
 
+import com.harsya.ukm.database.DataStore;
+import com.harsya.ukm.login.Anggota;
+import com.harsya.ukm.login.ILogin;
+import com.harsya.ukm.login.User;
 import javax.swing.*;
 import java.awt.*;
 
@@ -73,7 +77,7 @@ public class AnggotaDashboard extends JPanel {
         });
 
         btnStatus.addActionListener(e -> {
-            StatusDialog dialog = new StatusDialog(mainFrame);
+            StatusDialog dialog = new StatusDialog(mainFrame, currentUser);
             dialog.setVisible(true);
         });
     }
@@ -81,12 +85,26 @@ public class AnggotaDashboard extends JPanel {
     public void setUser(String username) {
         this.currentUser = username;
         welcomeLabel.setText("Selamat datang, " + username);
+
+        User user = DataStore.findUser(username);
+        if (user instanceof Anggota) {
+            Anggota anggota = (Anggota) user;
+            ILogin loginRef = anggota;
+            loginRef.login();
+        }
     }
 
     private void logout() {
         int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin logout?",
                 "Logout", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
+            if (currentUser != null) {
+                User user = DataStore.findUser(currentUser);
+                if (user instanceof ILogin) {
+                    ILogin loginRef = (ILogin) user;
+                    loginRef.logout();
+                }
+            }
             currentUser = null;
             mainFrame.getLoginPanel().resetForm();
             mainFrame.showPanel("Login");

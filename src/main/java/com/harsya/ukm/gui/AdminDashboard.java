@@ -1,4 +1,4 @@
-package GUI;
+package com.harsya.ukm.gui;
 
 import javax.swing.*;
 import java.awt.*;

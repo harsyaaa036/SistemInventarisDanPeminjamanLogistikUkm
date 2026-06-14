@@ -1,8 +1,9 @@
-package GUI;
+package com.harsya.ukm.gui;
 
-import Database.DataStore;
-import Transaksi.Peminjaman;
-import Transaksi.Pengembalian;
+import com.harsya.ukm.database.DataStore;
+import com.harsya.ukm.exception.DataTidakDitemukanException;
+import com.harsya.ukm.transaksi.Peminjaman;
+import com.harsya.ukm.transaksi.Pengembalian;
 import javax.swing.*;
 import java.awt.*;
 
@@ -48,10 +49,16 @@ public class PengembalianDialog extends JDialog {
         gbc.gridy = 4;
         add(submitButton, gbc);
 
-        submitButton.addActionListener(e -> proses());
+        submitButton.addActionListener(e -> {
+            try {
+                proses();
+            } catch (DataTidakDitemukanException ex) {
+                messageLabel.setText(ex.getMessage());
+            }
+        });
     }
 
-    private void proses() {
+    private void proses() throws DataTidakDitemukanException {
         try {
             int idPeminjaman = Integer.parseInt(idField.getText().trim());
 
@@ -64,8 +71,7 @@ public class PengembalianDialog extends JDialog {
             }
 
             if (peminjaman == null) {
-                messageLabel.setText("ID Peminjaman tidak ditemukan!");
-                return;
+                throw new DataTidakDitemukanException("Peminjaman", idPeminjaman);
             }
 
             String kondisi = (String) kondisiCombo.getSelectedItem();

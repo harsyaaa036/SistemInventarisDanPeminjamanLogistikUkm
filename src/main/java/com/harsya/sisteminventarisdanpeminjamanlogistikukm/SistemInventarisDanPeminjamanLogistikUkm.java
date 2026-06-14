@@ -1,6 +1,6 @@
 package com.harsya.sisteminventarisdanpeminjamanlogistikukm;
 
-import GUI.MainFrame;
+import com.harsya.ukm.gui.MainFrame;
 import javax.swing.SwingUtilities;
 
 public class SistemInventarisDanPeminjamanLogistikUkm {

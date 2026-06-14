@@ -1,9 +1,9 @@
-package GUI;
+package com.harsya.ukm.gui;
 
-import Database.DataStore;
-import Login.Admin;
-import Login.Anggota;
-import Login.User;
+import com.harsya.ukm.database.DataStore;
+import com.harsya.ukm.login.Admin;
+import com.harsya.ukm.login.Anggota;
+import com.harsya.ukm.login.User;
 import javax.swing.*;
 import java.awt.*;
 

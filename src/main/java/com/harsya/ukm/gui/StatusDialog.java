@@ -1,17 +1,20 @@
-package GUI;
+package com.harsya.ukm.gui;
 
-import Database.DataStore;
-import Transaksi.Peminjaman;
-import Transaksi.Pengembalian;
+import com.harsya.ukm.database.DataStore;
+import com.harsya.ukm.transaksi.Peminjaman;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatusDialog extends JDialog {
     private DefaultTableModel tableModel;
+    private String currentUser;
 
-    public StatusDialog(MainFrame mainFrame) {
+    public StatusDialog(MainFrame mainFrame, String currentUser) {
         super(mainFrame, "Status Peminjaman", true);
+        this.currentUser = currentUser;
         setSize(600, 400);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout(10, 10));
@@ -28,6 +31,13 @@ public class StatusDialog extends JDialog {
             @Override
             public boolean isCellEditable(int row, int column) { return false; }
         };
+
+        List<Peminjaman> filteredList = new ArrayList<>();
+        for (Peminjaman p : DataStore.daftarPeminjaman) {
+            if (currentUser == null || p.getNamaBarang().toLowerCase().contains(currentUser.toLowerCase())) {
+                filteredList.add(p);
+            }
+        }
 
         for (Peminjaman p : DataStore.daftarPeminjaman) {
             tableModel.addRow(new Object[]{
@@ -46,7 +56,7 @@ public class StatusDialog extends JDialog {
         table.setRowHeight(25);
         add(new JScrollPane(table), BorderLayout.CENTER);
 
-        JPanel infoPanel = new JPanel(new GridLayout(2, 1, 5, 5));
+        JPanel infoPanel = new JPanel(new GridLayout(3, 1, 5, 5));
         int totalPeminjaman = DataStore.daftarPeminjaman.size();
         int aktif = 0;
         for (Peminjaman p : DataStore.daftarPeminjaman) {
@@ -54,6 +64,7 @@ public class StatusDialog extends JDialog {
                 aktif++;
             }
         }
+        infoPanel.add(new JLabel("User: " + (currentUser != null ? currentUser : "Semua")));
         infoPanel.add(new JLabel("Total Peminjaman: " + totalPeminjaman));
         infoPanel.add(new JLabel("Peminjaman Aktif: " + aktif));
 

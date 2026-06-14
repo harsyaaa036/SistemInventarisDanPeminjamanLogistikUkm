@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Login;
+package com.harsya.ukm.login;
 
-import Barang.Barang;
+import com.harsya.ukm.barang.Barang;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -96,6 +92,12 @@ public class Admin extends User implements ILogin, ICrudBarang {
         System.out.println(barang);
     }
 
+    public void tambahBarang(String nama, int stok, double harga) {
+        Barang barang = new Barang(nama, stok, harga);
+        daftarBarang.add(barang);
+        System.out.println("Barang '" + nama + "' berhasil ditambahkan via overloaded method!");
+    }
+
     public void lihatBarang() {
         System.out.println("\n--- Daftar Barang ---");
         if (daftarBarang.isEmpty()) {
@@ -176,5 +178,15 @@ public class Admin extends User implements ILogin, ICrudBarang {
     public void daftarLaporanPeminjaman() {
         System.out.println("\n--- Laporan Transaksi ---");
         System.out.println("Fitur laporan masih dalam pengembangan.");
+    }
+
+    public int getNim() { return nim; }
+    public void setNim(int nim) { this.nim = nim; }
+    public String getJabatan() { return jabatan; }
+    public void setJabatan(String jabatan) { this.jabatan = jabatan; }
+
+    @Override
+    public String toString() {
+        return super.toString() + " | NIM: " + nim + " | Jabatan: " + jabatan;
     }
 }
