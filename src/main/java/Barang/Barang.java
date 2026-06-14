@@ -1,29 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Barang;
 
-/**
- *
- * @author mfauz
- */
-public abstract class Barang {
+public class Barang {
+    private static int counter = 1;
+    private int id;
+    private String nama;
+    private int stok;
+    private double harga;
 
-    protected String kategori;
-    protected String nama;
-    protected int stock;
-    protected String kondisi;
-
-    public Barang() {
+    public Barang(String nama, int stok, double harga) {
+        this.id = counter++;
+        this.nama = nama;
+        this.stok = stok;
+        this.harga = harga;
     }
 
-    public String getKategori() {
-        return kategori;
-    }
-
-    public void setKategori(String kategori) {
-        this.kategori = kategori;
+    public int getId() {
+        return id;
     }
 
     public String getNama() {
@@ -34,19 +26,24 @@ public abstract class Barang {
         this.nama = nama;
     }
 
-    public int getStock() {
-        return stock;
+    public int getStok() {
+        return stok;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setStok(int stok) {
+        this.stok = stok;
     }
 
-    public String getKondisi() {
-        return kondisi;
+    public double getHarga() {
+        return harga;
     }
 
-    public void setKondisi(String kondisi) {
-        this.kondisi = kondisi;
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " | " + nama + " | Stok: " + stok + " | Harga: Rp" + harga;
     }
 }

@@ -4,17 +4,16 @@
  */
 package Login;
 
-/**
- *
- * @author masag
- */
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public abstract class User {
     protected String username;
     protected String password;
 
     public User(String username, String password) {
         this.username = username;
-        this.password = password;
+        this.password = hashPassword(password);
     }
 
     public abstract void showMenu();
@@ -24,6 +23,26 @@ public abstract class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = hashPassword(password);
+    }
+
+    public boolean verifyPassword(String password) {
+        return this.password.equals(hashPassword(password));
+    }
+
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-256 not available", e);
+        }
     }
 }
