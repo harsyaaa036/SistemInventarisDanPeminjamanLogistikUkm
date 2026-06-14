@@ -27,6 +27,8 @@ public class Admin extends User implements ILogin, ICrudBarang {
             daftarBarang.add(new Barang("Meja Lipat", 20, 150000));
             daftarBarang.add(new Barang("Kursi Plastik", 50, 25000));
             daftarBarang.add(new Barang("Tenda", 10, 500000));
+            daftarBarang.add(new Barang("Sound System", 5, 2000000));
+            daftarBarang.add(new Barang("Proyektor", 3, 3500000));
         }
     }
 
