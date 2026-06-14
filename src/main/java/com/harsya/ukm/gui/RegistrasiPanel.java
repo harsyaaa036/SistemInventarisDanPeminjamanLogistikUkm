@@ -151,7 +151,9 @@ public class RegistrasiPanel extends JPanel {
                 messageLabel.setText("NIM harus angka!");
                 return;
             }
-            DataStore.daftarUser.add(new Admin(username, password, nim, jabatan));
+            Admin newAdmin = new Admin(username, password, nim, jabatan);
+            DataStore.daftarUser.add(newAdmin);
+            DataStore.userMap.put(username, newAdmin);
         } else {
             String instansi = instansiField.getText().trim();
             String noHp = noHpField.getText().trim();
@@ -160,7 +162,9 @@ public class RegistrasiPanel extends JPanel {
                 messageLabel.setText("Semua field harus diisi!");
                 return;
             }
-            DataStore.daftarUser.add(new Anggota(username, password, instansi, noHp, lokasi));
+            Anggota newAnggota = new Anggota(username, password, instansi, noHp, lokasi);
+            DataStore.daftarUser.add(newAnggota);
+            DataStore.userMap.put(username, newAnggota);
         }
 
         JOptionPane.showMessageDialog(this, "Registrasi berhasil! Silakan login.",
