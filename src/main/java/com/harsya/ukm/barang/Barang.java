@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Barang {
     private static int counter = 1;
     private int id;
-    private String nama;
+    String nama;
     private int stok;
     private double harga;
 
