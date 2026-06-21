@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Barang;
+package com.harsya.ukm.barang;
 
 /**
  *
@@ -15,10 +15,15 @@ public class barangAset extends Barang {
     private String instansi;
     private Date tanggalPinjam;
     private Date rencanaPengembalian;
+    private String kategori;
+    private String stock;
+    private String kondisi;
 
-    public barangAset() {
-        super();
+    public barangAset(String nama, int stok, double harga) {
+        super(nama, stok, harga);
     }
+
+ 
 
     public void tampilInfo() {
         System.out.println("Nama : " + nama);

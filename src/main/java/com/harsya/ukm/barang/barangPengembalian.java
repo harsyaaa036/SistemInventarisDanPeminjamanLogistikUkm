@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Barang;
+package com.harsya.ukm.barang;
 
 /**
  *
@@ -16,8 +16,8 @@ public class barangPengembalian extends Barang {
     private String kondisiAkhir;
     private int denda;
 
-    public barangPengembalian() {
-        super();
+    public barangPengembalian(String nama, int stok, double harga) {
+        super(nama, stok, harga);
     }
 
     public void cekKondisi() {
